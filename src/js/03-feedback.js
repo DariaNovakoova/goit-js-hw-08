@@ -9,3 +9,46 @@
 // Під час сабміту форми очищуй сховище і поля форми, а також виводь у консоль об'єкт з полями email, message та їхніми поточними значеннями.
 
 // Зроби так, щоб сховище оновлювалось не частіше, ніж раз на 500 мілісекунд. Для цього додай до проекту і використовуй бібліотеку lodash.throttle.
+
+import throttle from 'lodash.throttle';
+
+const refs = {
+  form: document.querySelector('form'),
+  textarea: document.querySelector('textarea'),
+  email: document.querySelector('[name="email"]'),
+};
+
+let obj = {};
+
+refs.form.addEventListener('input', throttle(onTextareaInput, 500));
+refs.form.addEventListener('submit', onFormSubmit);
+
+function onTextareaInput() {
+  obj = {
+    email: refs.email.value,
+    message: refs.textarea.value,
+  };
+
+  localStorage.setItem('feedback-form-state', JSON.stringify(obj));
+}
+
+function checkForm() {
+  const valInput = JSON.parse(localStorage.getItem('feedback-form-state'));
+  if (valInput) {
+    refs.email.value = valInput.email || '';
+    refs.message.value = valInput.message || '';
+  }
+}
+checkForm();
+
+function onFormSubmit(e) {
+  e.preventDefault();
+  if (refs.email.value && refs.message.value) {
+    console.log(localStorage.getItem('feedback-form-state'));
+    e.currentTarget.reset();
+    localStorage.removeItem('feedback-form-state');
+    obj = {};
+  } else {
+    alert('Please fill out all forms field');
+  }
+}

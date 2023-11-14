@@ -23,9 +23,6 @@ player.on(
     saveToLS('videoplayer-current-time', seconds);
   }, 1000)
 );
-// function (data) {
-//     localStorage.setItem('videoplayer-current-time', data.seconds);
-//   }, 1000)
 player.setCurrentTime(loadFromLS('videoplayer-current-time'));
 
 function saveToLS(key, value) {
