@@ -36,14 +36,14 @@ function checkForm() {
   const valInput = JSON.parse(localStorage.getItem('feedback-form-state'));
   if (valInput) {
     refs.email.value = valInput.email || '';
-    refs.message.value = valInput.message || '';
+    refs.textarea.value = valInput.message || '';
   }
 }
 checkForm();
 
 function onFormSubmit(e) {
   e.preventDefault();
-  if (refs.email.value && refs.message.value) {
+  if (refs.email.value && refs.textarea.value) {
     console.log(localStorage.getItem('feedback-form-state'));
     e.currentTarget.reset();
     localStorage.removeItem('feedback-form-state');
