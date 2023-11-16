@@ -20,20 +20,11 @@ const player = new Player(iframe);
 player.on(
   'timeupdate',
   throttle(({ seconds }) => {
-    saveToLS('videoplayer-current-time', seconds);
+    localStorage.setItem('videoplayer-current-time', JSON.stringify(seconds));
   }, 1000)
 );
-player.setCurrentTime(loadFromLS('videoplayer-current-time'));
 
-function saveToLS(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
-function loadFromLS(key) {
-  const data = localStorage.getItem(key);
-  try {
-    return JSON.parse(data);
-  } catch {
-    return data;
-  }
+const checkTime = localStorage.getItem('videoplayer-current-time');
+if (checkTime !== null) {
+  player.setCurrentTime(JSON.parse(checkTime));
 }

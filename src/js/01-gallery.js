@@ -8,7 +8,7 @@ const gallery = document.querySelector('.gallery');
 
 gallery.insertAdjacentHTML('beforeend', createMarkup(galleryItems));
 
-const lightbox = new SimpleLightbox('.gallery a', {
+new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',
   captionDelay: 250,

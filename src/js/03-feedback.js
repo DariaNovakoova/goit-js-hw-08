@@ -44,7 +44,7 @@ checkForm();
 function onFormSubmit(e) {
   e.preventDefault();
   if (refs.email.value && refs.textarea.value) {
-    console.log(localStorage.getItem('feedback-form-state'));
+    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
     e.currentTarget.reset();
     localStorage.removeItem('feedback-form-state');
     obj = {};
